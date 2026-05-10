@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alquimista — Techno DJ & Producer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:       #000000;
+            --bg-1:     #0A0A0A;
+            --bg-2:     #111111;
+            --bg-3:     #1A1A1A;
+            --silver:   #C8C8C8;
+            --silver-d: #888888;
+            --silver-l: #E8E8E8;
+            --white:    #FFFFFF;
+            --border:   rgba(200,200,200,0.1);
+            --border-b: rgba(200,200,200,0.06);
+            --display:  'Bebas Neue', sans-serif;
+            --body:     'Space Grotesk', sans-serif;
+            --mono:     'DM Mono', monospace;
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--silver-d) var(--bg-1);
+        }
+        html::-webkit-scrollbar { width: 3px; }
+        html::-webkit-scrollbar-track { background: var(--bg-1); }
+        html::-webkit-scrollbar-thumb { background: var(--silver-d); }
+
+        body {
+            font-family: var(--body);
+            background: var(--bg);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+        img { max-width:100%; display:block; }
+        a   { text-decoration:none; color:inherit; }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top:0; left:0; right:0;
+            z-index: 100;
+            height: 62px;
+            padding: 0 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .4s, border-color .4s;
+        }
+        nav.scrolled {
+            background: rgba(0,0,0,.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-logo {
+            font-family: var(--display);
+            font-size: 1.3rem;
+            letter-spacing: .14em;
+            color: var(--white);
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            font-size: .75rem;
+            font-weight: 500;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--silver-d);
+            transition: color .25s;
+        }
+        .nav-links a:hover { color: var(--white); }
+        .nav-cta {
+            border: 1px solid var(--silver-d);
+            color: var(--white);
+            padding: .45rem 1.2rem;
+            border-radius: 3px;
+            font-size: .74rem;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            transition: all .25s;
+        }
+        .nav-cta:hover {
+            background: var(--white);
+            color: var(--bg);
+            border-color: var(--white);
+        }
+
+        /* ── HERO ── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            padding: 7rem 2rem 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-noise {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+            opacity: .4;
+            pointer-events: none;
+        }
+        .hero-line {
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(200,200,200,.06), transparent);
+        }
+        .hero-line:nth-child(2) { left: 25%; }
+        .hero-line:nth-child(3) { left: 50%; }
+        .hero-line:nth-child(4) { left: 75%; }
+
+        /* IG Card */
+        .ig-card {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 460px;
+            background: var(--bg-1);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 40px 80px rgba(0,0,0,.8);
+        }
+        .ig-card-top {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1.4rem;
+        }
+
+        /* Ring */
+        .photo-wrap { position:relative; flex-shrink:0; width:88px; height:88px; }
+        .photo-ring {
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #555, #fff, #aaa, #333, #fff, #555);
+            animation: ringRotate 4s linear infinite;
+        }
+        .photo-ring::after {
+            content:'';
+            position:absolute;
+            inset:3px;
+            border-radius:50%;
+            background: var(--bg-1);
+        }
+        @keyframes ringRotate { to { transform:rotate(360deg); } }
+        .photo-img {
+            position:relative; z-index:1;
+            width:100%; height:100%;
+            border-radius:50%; object-fit:cover;
+        }
+
+        .profile-info { flex:1; min-width:0; }
+        .profile-name-row {
+            display:flex; align-items:center; gap:.4rem;
+            margin-bottom:.22rem;
+        }
+        .profile-name-text { font-weight:700; font-size:1.12rem; }
+        .verified {
+            display:inline-flex; align-items:center; justify-content:center;
+            width:18px; height:18px;
+            background: linear-gradient(135deg, #1877F2, #00C7FF);
+            border-radius:50%; flex-shrink:0;
+        }
+        .verified svg { width:10px; height:10px; fill:#fff; }
+        .profile-handle { font-size:.76rem; font-family:var(--mono); margin-bottom:.18rem; }
+        .profile-handle a { color:var(--silver); transition:color .2s; }
+        .profile-handle a:hover { color:var(--white); }
+        .profile-cat { font-size:.7rem; text-transform:uppercase; letter-spacing:.1em; color:var(--silver-d); }
+
+        .ig-stats {
+            display:flex;
+            border-top:1px solid var(--border-b);
+            border-bottom:1px solid var(--border-b);
+            padding:.85rem 0; margin-bottom:1rem;
+        }
+        .ig-stat { flex:1; text-align:center; padding:0 .4rem; }
+        .ig-stat + .ig-stat { border-left:1px solid var(--border-b); }
+        .ig-stat-num { font-weight:700; font-size:1.1rem; display:block; }
+        .ig-stat-lbl { font-size:.66rem; text-transform:uppercase; letter-spacing:.08em; color:var(--silver-d); margin-top:.1rem; }
+
+        .ig-bio { font-size:.87rem; line-height:1.65; margin-bottom:1rem; opacity:.85; color:var(--silver-l); }
+
+        .ig-btns { display:flex; gap:.5rem; margin-bottom:1.2rem; }
+        .ig-btn {
+            flex:1; padding:.55rem; border-radius:6px;
+            text-align:center; font-size:.82rem; font-weight:600;
+            cursor:pointer; transition:all .2s;
+        }
+        .ig-btn-primary { background:var(--white); color:var(--bg); }
+        .ig-btn-primary:hover { background:var(--silver-l); transform:translateY(-1px); }
+        .ig-btn-secondary { background:transparent; border:1px solid var(--border); color:var(--white); }
+        .ig-btn-secondary:hover { border-color:var(--silver-d); }
+
+        .ig-mini-grid {
+            display:grid; grid-template-columns:repeat(3,1fr);
+            gap:3px; border-radius:8px; overflow:hidden;
+        }
+        .mini-cell { aspect-ratio:1; overflow:hidden; background:var(--bg-2); }
+        .mini-cell img { width:100%; height:100%; object-fit:cover; transition:transform .4s; }
+        .mini-cell:hover img { transform:scale(1.08); }
+        .mini-cell.ph {
+            background:var(--bg-2);
+            display:flex; align-items:center; justify-content:center;
+        }
+        .mini-cell.ph::after { content:'+'; font-size:1rem; color:var(--bg-3); }
+
+        /* Hero tagline */
+        .hero-tagline { position:relative; z-index:2; text-align:center; }
+        .hero-tagline h1 {
+            font-family: var(--display);
+            font-size: clamp(2.2rem, 5.5vw, 4.8rem);
+            letter-spacing: .06em;
+            line-height: 1;
+            color: var(--white);
+        }
+        .hero-tagline h1 em { color:var(--silver-d); font-style:normal; }
+        .hero-community {
+            display:inline-flex; align-items:center; gap:.55rem;
+            border:1px solid var(--border);
+            border-radius:100px;
+            padding:.48rem 1.2rem;
+            font-size:.82rem; color:var(--silver-d);
+            margin-top:1.1rem;
+        }
+        .hero-community strong { color:var(--white); }
+        .pulse-dot {
+            width:6px; height:6px; border-radius:50%;
+            background:var(--silver);
+            animation:dotPulse 2.2s infinite;
+        }
+        @keyframes dotPulse {
+            0%,100% { opacity:1; transform:scale(1); }
+            50%      { opacity:.3; transform:scale(.6); }
+        }
+
+        /* ── SECTIONS ── */
+        section { padding: 5.5rem 2rem; }
+        .container { max-width:1100px; margin:0 auto; }
+        .s-label {
+            font-family:var(--mono);
+            font-size:.68rem; letter-spacing:.24em;
+            text-transform:uppercase; color:var(--silver-d);
+            display:flex; align-items:center; gap:.5rem;
+            margin-bottom:.75rem;
+        }
+        .s-label::before { content:''; width:18px; height:1px; background:var(--silver-d); }
+        .s-label-mt { margin-top:3rem; }
+        .s-title {
+            font-family:var(--display);
+            font-size:clamp(1.9rem,4vw,3.4rem);
+            letter-spacing:.05em; line-height:1.05;
+            margin-bottom:1.5rem;
+        }
+
+        /* ── ABOUT ── */
+        #about { background:var(--bg-1); border-top:1px solid var(--border-b); border-bottom:1px solid var(--border-b); }
+        .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+        .about-text p { font-size:.96rem; line-height:1.8; color:rgba(255,255,255,.65); margin-bottom:1.2rem; }
+        .about-text p strong { color:var(--white); }
+        .since-badge {
+            display:inline-flex; align-items:center; gap:.5rem;
+            border:1px solid var(--border);
+            padding:.38rem 1rem; border-radius:3px;
+            font-size:.73rem; font-family:var(--mono);
+            letter-spacing:.12em; text-transform:uppercase;
+            color:var(--silver-d); margin-bottom:1.5rem;
+        }
+        .tags { display:flex; flex-wrap:wrap; gap:.45rem; margin-top:1.5rem; }
+        .tag {
+            padding:.36rem .9rem; border:1px solid var(--border-b);
+            border-radius:3px; font-size:.72rem;
+            font-family:var(--mono); letter-spacing:.08em;
+            color:var(--silver-d); background:var(--bg-2);
+            transition:all .3s;
+        }
+        .tag:hover { border-color:var(--silver-d); color:var(--white); }
+        .about-photo-wrap { border-radius:10px; overflow:hidden; aspect-ratio:4/5; }
+        .about-photo-wrap img { width:100%; height:100%; object-fit:cover; }
+
+        /* ── PROJECTS ── */
+        #projects { background:var(--bg); }
+        .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.2rem; margin-top:3rem; }
+        .proj-card {
+            background:var(--bg-1); border:1px solid var(--border-b);
+            border-radius:12px; padding:2rem;
+            position:relative; overflow:hidden;
+            transition:transform .4s, border-color .4s, box-shadow .4s;
+        }
+        .proj-card::before {
+            content:''; position:absolute; top:0; left:0; right:0; height:1px;
+            background:linear-gradient(90deg,transparent,var(--silver-d),transparent);
+            transform:scaleX(0); transform-origin:left; transition:transform .5s;
+        }
+        .proj-card:hover::before { transform:scaleX(1); }
+        .proj-card:hover { transform:translateY(-4px); border-color:var(--border); box-shadow:0 20px 40px rgba(0,0,0,.5); }
+        .proj-num {
+            font-family:var(--display); font-size:3rem; line-height:1;
+            color:var(--bg-3); margin-bottom:1rem; letter-spacing:.05em;
+            -webkit-user-select:none;
+            user-select:none;
+        }
+        .proj-name { font-family:var(--display); font-size:1.55rem; letter-spacing:.07em; margin-bottom:.3rem; }
+        .proj-handle { font-family:var(--mono); font-size:.72rem; color:var(--silver-d); margin-bottom:.9rem; }
+        .proj-desc { font-size:.88rem; line-height:1.7; color:var(--silver-d); }
+
+        /* ── RELEASES ── */
+        #releases { background:var(--bg-1); border-top:1px solid var(--border-b); }
+        .releases-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:1rem; margin-top:2.5rem; }
+        .release-item { position:relative; overflow:hidden; border-radius:8px; aspect-ratio:1; cursor:pointer; }
+        .release-item img { width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+        .release-item:hover img { transform:scale(1.06); }
+        .release-overlay {
+            position:absolute; inset:0;
+            background:linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 60%);
+            opacity:0; transition:opacity .35s;
+            display:flex; align-items:flex-end; padding:1rem;
+        }
+        .release-item:hover .release-overlay { opacity:1; }
+        .release-overlay span { font-size:.72rem; font-family:var(--mono); color:var(--silver); letter-spacing:.08em; }
+
+        /* Labels */
+        .labels-wrap { display:flex; flex-wrap:wrap; gap:.65rem; margin-top:2.5rem; }
+        .label-pill {
+            padding:.45rem 1.1rem; border:1px solid var(--border-b);
+            border-radius:100px; font-size:.76rem;
+            font-family:var(--mono); color:var(--silver-d);
+            transition:all .25s;
+        }
+        .label-pill:hover { border-color:var(--silver-d); color:var(--white); }
+
+        /* ── GALLERY ── */
+        #gallery { background:var(--bg); }
+        .gallery-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-top:3rem; }
+        .gallery-item { position:relative; border-radius:10px; overflow:hidden; aspect-ratio:1; }
+        .gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
+        .gallery-item:hover img { transform:scale(1.04); }
+        .gallery-overlay {
+            position:absolute; inset:0;
+            background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 55%);
+            opacity:0; transition:opacity .4s;
+            display:flex; align-items:flex-end; padding:1.5rem;
+        }
+        .gallery-item:hover .gallery-overlay { opacity:1; }
+        .gallery-overlay span { font-size:.74rem; font-family:var(--mono); color:var(--silver-d); letter-spacing:.1em; }
+
+        /* ── STATS ── */
+        #stats { background:var(--bg-1); border-top:1px solid var(--border-b); border-bottom:1px solid var(--border-b); }
+        .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem; margin-top:3rem; }
+        .stat-card {
+            background:var(--bg-2); border:1px solid var(--border-b);
+            border-radius:10px; padding:2rem 1rem; text-align:center;
+            transition:transform .4s, border-color .4s;
+        }
+        .stat-card:hover { transform:translateY(-4px); border-color:var(--border); }
+        .stat-num { font-family:var(--display); font-size:2.8rem; letter-spacing:.03em; line-height:1; }
+        .stat-num sup { font-size:1.4rem; color:var(--silver-d); }
+        .stat-lbl { font-size:.72rem; text-transform:uppercase; letter-spacing:.14em; color:var(--silver-d); margin-top:.5rem; font-family:var(--mono); }
+        .stat-plt { font-size:.64rem; color:var(--bg-3); margin-top:.3rem; font-family:var(--mono); }
+
+        /* ── CONTACT ── */
+        #contact { background:var(--bg); }
+        .contact-inner { text-align:center; max-width:560px; margin:0 auto; }
+        .contact-inner .s-label { justify-content:center; }
+        .contact-inner .s-title { text-align:center; }
+        .contact-inner p { font-size:.97rem; line-height:1.75; color:var(--silver-d); margin-bottom:2.5rem; }
+        .contact-email-btn {
+            display:inline-flex; align-items:center; gap:.75rem;
+            background:var(--white); color:var(--bg);
+            padding:.9rem 2rem; border-radius:5px;
+            font-size:.95rem; font-weight:700; letter-spacing:.04em;
+            transition:all .3s; margin-bottom:2.5rem;
+        }
+        .contact-email-btn:hover { background:var(--silver-l); transform:translateY(-2px); box-shadow:0 10px 30px rgba(255,255,255,.1); }
+        .socials { display:flex; justify-content:center; flex-wrap:wrap; gap:.55rem; }
+        .soc-link {
+            display:flex; align-items:center; gap:.45rem;
+            padding:.48rem .95rem; background:var(--bg-1);
+            border:1px solid var(--border-b); border-radius:5px;
+            font-size:.76rem; font-family:var(--mono); color:var(--silver-d);
+            transition:all .25s;
+        }
+        .soc-link:hover { border-color:var(--silver-d); color:var(--white); transform:translateY(-2px); }
+
+        /* ── FOOTER ── */
+        footer { background:var(--bg); padding:1.5rem 2rem; text-align:center; border-top:1px solid var(--border-b); }
+        footer p { font-size:.72rem; color:var(--silver-d); font-family:var(--mono); }
+        footer a { color:var(--silver); transition:color .2s; }
+        footer a:hover { color:var(--white); }
+
+        /* ── REVEAL ── */
+        .reveal { opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease; }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+        .reveal-l { opacity:0; transform:translateX(-26px); transition:opacity .7s, transform .7s; }
+        .reveal-l.visible { opacity:1; transform:translateX(0); }
+        .reveal-r { opacity:0; transform:translateX(26px); transition:opacity .7s, transform .7s; }
+        .reveal-r.visible { opacity:1; transform:translateX(0); }
+        .stagger > .reveal:nth-child(1) { transition-delay:.0s; }
+        .stagger > .reveal:nth-child(2) { transition-delay:.1s; }
+        .stagger > .reveal:nth-child(3) { transition-delay:.2s; }
+        .stagger > .reveal:nth-child(4) { transition-delay:.3s; }
+
+        /* ── MOBILE BOTTOM NAV ── */
+        .mob-nav {
+            display: none;
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            z-index: 200;
+            background: rgba(6,6,6,.97);
+            -webkit-backdrop-filter: blur(24px);
+            backdrop-filter: blur(24px);
+            border-top: 1px solid rgba(200,200,200,.08);
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            padding: .5rem 0 calc(.5rem + env(safe-area-inset-bottom, 0px));
+        }
+        .mob-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .22rem;
+            color: var(--silver-d);
+            font-size: .54rem;
+            font-family: var(--mono);
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            padding: .3rem .6rem;
+            transition: color .2s;
+            min-width: 52px;
+            min-height: 44px;
+            justify-content: center;
+        }
+        .mob-nav-item.active { color: var(--white); }
+        .mob-nav-item svg { width: 20px; height: 20px; stroke-width: 1.5; }
+        .mob-nav-center {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1.5px solid rgba(200,200,200,.25);
+            padding: 0; gap: 0;
+            min-height: 40px;
+            transition: border-color .2s;
+        }
+        .mob-nav-center.active { border-color: var(--white); }
+        .mob-nav-center img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            nav { display: none; }
+            body { padding-bottom: 70px; }
+            .mob-nav { display: flex; }
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .about-photo-wrap { order: -1; aspect-ratio: 4/3; }
+            .stats-grid { grid-template-columns: repeat(2,1fr); }
+            .gallery-grid { grid-template-columns: repeat(2,1fr); }
+            .projects-grid { grid-template-columns: 1fr; }
+            .releases-grid { grid-template-columns: repeat(3,1fr); }
+            footer { padding-bottom: calc(70px + 1.5rem); }
+        }
+        @media (max-width: 480px) {
+            section { padding: 3.2rem 1.1rem; }
+            #hero {
+                padding: 4rem 1rem 2rem;
+                gap: 1.8rem;
+                height: auto;
+            }
+            .ig-card {
+                padding: 1.2rem;
+                border-radius: 14px;
+                max-width: 100%;
+            }
+            .photo-wrap { width: 70px; height: 70px; }
+            .ig-card-top { gap: 1rem; margin-bottom: 1.1rem; }
+            .profile-name-text { font-size: 1rem; }
+            .profile-cat { font-size: .63rem; }
+            .ig-bio { font-size: .82rem; line-height: 1.6; margin-bottom: .85rem; }
+            .ig-btns { gap: .4rem; margin-bottom: 1rem; }
+            .ig-btn {
+                padding: .65rem .4rem;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: .78rem;
+            }
+            .ig-stat-num { font-size: .95rem; }
+            .ig-stat-lbl { font-size: .58rem; }
+            .hero-tagline { padding: 0 .5rem; }
+            .hero-tagline h1 { font-size: clamp(2rem, 11vw, 3rem); line-height: 1.05; }
+            .hero-community { font-size: .74rem; padding: .4rem .9rem; margin-top: .9rem; }
+            .s-title { font-size: clamp(1.6rem, 8.5vw, 2.6rem); }
+            .s-label { font-size: .64rem; }
+            .about-text p { font-size: .88rem; }
+            .since-badge { font-size: .67rem; }
+            .tags { gap: .35rem; margin-top: 1.2rem; }
+            .tag { font-size: .66rem; padding: .3rem .75rem; }
+            .proj-card { padding: 1.4rem; }
+            .proj-num { font-size: 2.2rem; }
+            .proj-name { font-size: 1.25rem; }
+            .proj-desc { font-size: .84rem; }
+            .releases-grid { grid-template-columns: repeat(2,1fr); gap: .7rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2,1fr); gap: .75rem; }
+            .stat-card { padding: 1.5rem .75rem; }
+            .stat-num { font-size: 2.2rem; }
+            .stat-lbl { font-size: .65rem; }
+            .contact-inner { padding: 0 .25rem; }
+            .contact-email-btn {
+                width: 100%;
+                justify-content: center;
+                font-size: .82rem;
+                word-break: break-all;
+                text-align: center;
+                padding: 1rem;
+                flex-wrap: wrap;
+                line-height: 1.5;
+                gap: .5rem;
+            }
+            .socials { gap: .35rem; }
+            .soc-link { min-height: 40px; font-size: .68rem; padding: .38rem .75rem; }
+            footer p { font-size: .67rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#releases">Releases</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="hero-noise"></div>
+    <div class="hero-line"></div>
+    <div class="hero-line"></div>
+    <div class="hero-line"></div>
+
+    <div class="ig-card reveal">
+        <div class="ig-card-top">
+            <div class="photo-wrap">
+                <div class="photo-ring"></div>
+                <img src="assets/instagram/profile.jpg" alt="Alquimista" class="photo-img">
+            </div>
+            <div class="profile-info">
+                <div class="profile-name-row">
+                    <span class="profile-name-text">Alquimista</span>
+                    <span class="verified" title="Verified">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                    </span>
+                </div>
+                <div class="profile-handle">
+                    <a href="https://www.instagram.com/alquimista.col/" target="_blank" rel="noopener">@alquimista.col</a>
+                </div>
+                <div class="profile-cat">DJ · Producer · Colombia / Belgium</div>
+            </div>
+        </div>
+
+        <div class="ig-stats">
+            <div class="ig-stat">
+                <span class="ig-stat-num">404</span>
+                <span class="ig-stat-lbl">Posts</span>
+            </div>
+            <div class="ig-stat">
+                <span class="ig-stat-num">5.6K</span>
+                <span class="ig-stat-lbl">Followers</span>
+            </div>
+            <div class="ig-stat">
+                <span class="ig-stat-num">830</span>
+                <span class="ig-stat-lbl">Following</span>
+            </div>
+        </div>
+
+        <p class="ig-bio">
+            Techno DJ & Producer. Co-founder of Fluxus Game, Acid Resistance and Human Traxx. Label owner: Transmuted Electronics. Sounds since 1999.
+        </p>
+
+        <div class="ig-btns">
+            <a href="#contact" class="ig-btn ig-btn-primary">Booking</a>
+            <a href="https://www.instagram.com/alquimista.col/" target="_blank" rel="noopener noreferrer" class="ig-btn ig-btn-secondary">Follow on IG</a>
+        </div>
+
+        <div class="ig-mini-grid">
+            <div class="mini-cell"><img src="assets/instagram/post-1.jpg" alt=""></div>
+            <div class="mini-cell"><img src="assets/instagram/post-2.png" alt=""></div>
+            <div class="mini-cell"><img src="assets/instagram/release-1.jpg" alt=""></div>
+            <div class="mini-cell"><img src="assets/instagram/release-2.jpg" alt=""></div>
+            <div class="mini-cell"><img src="assets/instagram/release-3.jpg" alt=""></div>
+            <div class="mini-cell"><img src="assets/instagram/release-4.jpg" alt=""></div>
+        </div>
+    </div>
+
+    <div class="hero-tagline reveal">
+        <h1><em>Sound in</em><br>permanent mutation.</h1>
+        <div class="hero-community">
+            <span class="pulse-dot"></span>
+            <strong>+6,000</strong>&nbsp;global community
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-text reveal-l">
+                <div class="s-label">About</div>
+                <h2 class="s-title">SOUND IN<br>PERMANENT<br>MUTATION</h2>
+                <span class="since-badge">Active since 1999</span>
+                <p>Colombian DJ and producer based in Belgium. He started with electronic sounds in <strong>1999</strong> and has since built an uncompromising identity within the global electronic music scene.</p>
+                <p>His work moves through <strong>Techno</strong> with deep roots in <strong>Acid</strong> and <strong>Electro</strong> — a sonic alchemy in permanent mutation that breaks barriers between genres, cultures and continents.</p>
+                <p>Co-founder of three defining collectives: <strong>Fluxus Game</strong>, <strong>Acid Resistance</strong> and <strong>Human Traxx</strong>.</p>
+                <div class="tags">
+                    <span class="tag">FLUXUS GAME</span>
+                    <span class="tag">ACID RESISTANCE</span>
+                    <span class="tag">HUMAN TRAXX</span>
+                    <span class="tag">TECHNO</span>
+                    <span class="tag">ACID</span>
+                    <span class="tag">ELECTRO</span>
+                    <span class="tag">COLOMBIA</span>
+                    <span class="tag">BELGIUM</span>
+                </div>
+            </div>
+            <div class="about-photo-wrap reveal-r">
+                <img src="assets/instagram/post-1.jpg" alt="Alquimista">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+    <div class="container">
+        <div class="s-label">Projects</div>
+        <h2 class="s-title">ONGOING<br>TRANSMUTATION</h2>
+        <div class="projects-grid stagger">
+            <div class="proj-card reveal">
+                <div class="proj-num">01</div>
+                <div class="proj-name">TRANSMUTED ELECTRONICS</div>
+                <div class="proj-handle">@transmutedelectronics</div>
+                <p class="proj-desc">Independent record label. The platform where sonic alchemy takes physical form — Techno, Acid and Electro releases with no commercial compromise.</p>
+            </div>
+            <div class="proj-card reveal">
+                <div class="proj-num">02</div>
+                <div class="proj-name">SHAPESHIFTER EVENTS</div>
+                <div class="proj-handle">@shapeshifter.events</div>
+                <p class="proj-desc">Live electronic music experiences. Events that transform space and time — where sound mutates into something completely new every night.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RELEASES -->
+<section id="releases">
+    <div class="container">
+        <div class="s-label">Discography</div>
+        <h2 class="s-title">RELEASES</h2>
+
+        <div class="releases-grid">
+            <div class="release-item reveal">
+                <img src="assets/instagram/release-1.jpg" alt="Wind Of The Flautist">
+                <div class="release-overlay"><span>Wind Of The Flautist</span></div>
+            </div>
+            <div class="release-item reveal">
+                <img src="assets/instagram/release-2.jpg" alt="Collected Works II">
+                <div class="release-overlay"><span>Collected Works II</span></div>
+            </div>
+            <div class="release-item reveal">
+                <img src="assets/instagram/release-3.jpg" alt="Acid Biology">
+                <div class="release-overlay"><span>Acid Biology</span></div>
+            </div>
+            <div class="release-item reveal">
+                <img src="assets/instagram/release-4.jpg" alt="Luminous Spores">
+                <div class="release-overlay"><span>Luminous Spores</span></div>
+            </div>
+            <div class="release-item reveal">
+                <img src="assets/instagram/release-5.jpg" alt="Hermetic Body">
+                <div class="release-overlay"><span>Hermetic Body</span></div>
+            </div>
+            <div class="release-item reveal">
+                <img src="assets/instagram/release-6.jpg" alt="Drawing The Symbols">
+                <div class="release-overlay"><span>Drawing The Symbols</span></div>
+            </div>
+        </div>
+
+        <div class="s-label s-label-mt">Labels</div>
+        <div class="labels-wrap">
+            <span class="label-pill">True Type Tracks</span>
+            <span class="label-pill">Refluxed Records</span>
+            <span class="label-pill">Tekx Records</span>
+            <span class="label-pill">Elektrax Music</span>
+            <span class="label-pill">I-Traxx Red Edition</span>
+            <span class="label-pill">Achromatiq</span>
+            <span class="label-pill">Fluctuat Records</span>
+            <span class="label-pill">Transmuted Electronics</span>
+        </div>
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+    <div class="container">
+        <div class="s-label">Gallery</div>
+        <h2 class="s-title">MOMENTS</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item reveal">
+                <img src="assets/instagram/post-1.jpg" alt="Alquimista">
+                <div class="gallery-overlay"><span>@alquimista.col</span></div>
+            </div>
+            <div class="gallery-item reveal">
+                <img src="assets/instagram/post-2.png" alt="Alquimista">
+                <div class="gallery-overlay"><span>@alquimista.col</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+    <div class="container">
+        <div class="s-label">Presence</div>
+        <h2 class="s-title">GLOBAL<br>COMMUNITY</h2>
+        <div class="stats-grid stagger">
+            <div class="stat-card reveal">
+                <div class="stat-num"><span data-target="5600">0</span></div>
+                <div class="stat-lbl">Followers</div>
+                <div class="stat-plt">Instagram</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-num"><span data-target="228">0</span></div>
+                <div class="stat-lbl">Followers</div>
+                <div class="stat-plt">Spotify</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-num"><span data-target="25">0</span><sup>+</sup></div>
+                <div class="stat-lbl">Years Active</div>
+                <div class="stat-plt">Since 1999</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-num"><span data-target="3">0</span></div>
+                <div class="stat-lbl">Collectives</div>
+                <div class="stat-plt">Co-Founder</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="container">
+        <div class="contact-inner reveal">
+            <div class="s-label">Contact</div>
+            <h2 class="s-title">BOOKINGS &<br>COLLABORATIONS</h2>
+            <a href="mailto:bookings@transmutedelectronics.com" class="contact-email-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,12 2,6"/>
+                </svg>
+                bookings@transmutedelectronics.com
+            </a>
+            <div class="socials">
+                <a href="https://www.instagram.com/alquimista.col/" target="_blank" rel="noopener" class="soc-link">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    Instagram
+                </a>
+                <a href="https://www.facebook.com/AlquimistaDj/" target="_blank" rel="noopener" class="soc-link">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    Facebook
+                </a>
+                <a href="https://soundcloud.com/alquimistaofficial" target="_blank" rel="noopener" class="soc-link">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.017 0-.034.002-.051.004-.058.007-.108.039-.142.086-.033.045-.049.1-.046.156l.233 2.89-.233 2.85c-.003.056.013.11.046.155.034.047.084.079.142.086.017.002.034.004.051.004.144 0 .262-.12.262-.262l.264-2.833-.264-2.869c0-.145-.118-.267-.262-.267zm1.854-.555c-.029 0-.058.005-.086.014-.123.04-.211.153-.211.286l-.232 3.33.232 3.233c0 .133.088.246.211.286.028.009.057.014.086.014.168 0 .302-.134.302-.302l.263-3.231-.263-3.327c0-.168-.134-.303-.302-.303zm1.869-.322c-.035 0-.07.006-.103.017-.15.048-.259.186-.259.351l-.22 3.652.22 3.454c0 .165.109.303.259.351.033.011.068.017.103.017.206 0 .373-.167.373-.373l.25-3.449-.25-3.645c0-.206-.167-.375-.373-.375zm1.882-.055c-.04 0-.08.007-.118.02-.176.057-.304.22-.304.414l-.21 3.707.21 3.536c0 .194.128.357.304.414.038.013.078.02.118.02.238 0 .431-.193.431-.431l.239-3.539-.239-3.71c0-.238-.193-.431-.431-.431zm1.887.017c-.046 0-.091.008-.135.023-.2.064-.346.249-.346.47l-.198 3.69.198 3.522c0 .221.146.406.346.47.044.015.089.023.135.023.273 0 .494-.221.494-.494l.225-3.521-.225-3.688c0-.273-.221-.494-.494-.494zm1.882.126c-.05 0-.1.009-.148.026-.222.073-.383.279-.383.524l-.188 3.564.188 3.472c0 .245.161.451.383.524.048.017.098.026.148.026.31 0 .56-.25.56-.56l.213-3.462-.213-3.554c0-.31-.25-.562-.56-.562zm8.738-3.523c-.372 0-.727.071-1.053.197C18.187 5.51 16.47 4.2 14.47 4.2c-.539 0-1.058.104-1.534.292-.18.07-.228.14-.229.2v14.85c.001.076.054.14.13.158l.023.004h8.584c.69 0 1.25-.56 1.25-1.25V9.842c0-.69-.56-1.25-1.25-1.25z"/></svg>
+                    SoundCloud
+                </a>
+                <a href="https://open.spotify.com/artist/2alq3w8ORFvNLr9OTDzUSZ" target="_blank" rel="noopener" class="soc-link">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                    Spotify
+                </a>
+                <a href="https://ra.co/dj/alquimista" target="_blank" rel="noopener" class="soc-link">
+                    <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><text x="0" y="15" font-family="Arial" font-weight="900" font-size="13" fill="currentColor">RA</text></svg>
+                    Resident Advisor
+                </a>
+                <a href="https://alquimistaofficial.bandcamp.com" target="_blank" rel="noopener" class="soc-link">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
+                    Bandcamp
+                </a>
+                <a href="https://www.youtube.com/channel/UCRuoIHJICzoq91ATCXvTxdA" target="_blank" rel="noopener" class="soc-link">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+                    YouTube
+                </a>
+                <a href="https://hearthis.at/alquimista/" target="_blank" rel="noopener" class="soc-link">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                    HearThis
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MOBILE NAV -->
+<nav class="mob-nav" id="mob-nav">
+    <a href="#about" class="mob-nav-item" data-section="about">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <span>About</span>
+    </a>
+    <a href="#releases" class="mob-nav-item" data-section="releases">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
+        <span>Music</span>
+    </a>
+    <a href="#hero" class="mob-nav-item mob-nav-center" data-section="hero">
+        <img src="assets/instagram/profile.jpg" alt="Alquimista">
+    </a>
+    <a href="#gallery" class="mob-nav-item" data-section="gallery">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg>
+        <span>Gallery</span>
+    </a>
+    <a href="#contact" class="mob-nav-item" data-section="contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        <span>Contact</span>
+    </a>
+</nav>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Alquimista · All rights reserved ·
+        <a href="https://www.instagram.com/alquimista.col/" target="_blank" rel="noopener">@alquimista.col</a>
+    </p>
+</footer>
+
+<script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive:true });
+
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => io.observe(el));
+
+    const cio = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            const el = e.target, end = parseInt(el.dataset.target);
+            let cur = 0;
+            const step = end / (1600 / 16);
+            const t = setInterval(() => {
+                cur = Math.min(cur + step, end);
+                el.textContent = Math.floor(cur).toLocaleString('en');
+                if (cur >= end) clearInterval(t);
+            }, 16);
+            cio.unobserve(el);
+        });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-target]').forEach(c => cio.observe(c));
+
+    const heroBg = document.querySelector('.hero-noise');
+    window.addEventListener('scroll', () => {
+        if (heroBg) heroBg.style.transform = `translateY(${window.scrollY * 0.25}px)`;
+    }, { passive:true });
+
+    const mobItems = document.querySelectorAll('.mob-nav-item');
+    const navSections = ['contact','stats','gallery','releases','projects','about','hero']
+        .map(id => document.getElementById(id)).filter(Boolean);
+    function updateMobNav() {
+        const mid = window.scrollY + window.innerHeight * 0.4;
+        let current = navSections[navSections.length - 1];
+        for (const s of navSections) { if (s.offsetTop <= mid) { current = s; break; } }
+        mobItems.forEach(item => {
+            const sec = item.dataset.section;
+            const match = sec === current.id
+                || (sec === 'releases' && current.id === 'projects')
+                || (sec === 'gallery'  && current.id === 'stats');
+            item.classList.toggle('active', match);
+        });
+    }
+    window.addEventListener('scroll', updateMobNav, { passive: true });
+    updateMobNav();
+</script>
+</body>
+</html>
