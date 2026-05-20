@@ -210,6 +210,15 @@
         .ig-btn-primary:hover { background:var(--silver-l); transform:translateY(-1px); }
         .ig-btn-secondary { background:transparent; border:1px solid var(--border); color:var(--white); }
         .ig-btn-secondary:hover { border-color:var(--silver-d); }
+        .ig-btn-linktree {
+            display:flex; align-items:center; justify-content:center; gap:.5rem;
+            width:100%; padding:.5rem; border-radius:6px;
+            background:transparent; border:1px solid rgba(200,200,200,.08);
+            font-size:.75rem; font-family:var(--mono); letter-spacing:.1em;
+            color:var(--silver-d); text-transform:uppercase;
+            transition:all .2s; margin-top:.1rem;
+        }
+        .ig-btn-linktree:hover { border-color:rgba(200,200,200,.3); color:var(--white); }
 
         .ig-mini-grid {
             display:grid; grid-template-columns:repeat(3,1fr);
@@ -605,6 +614,10 @@
             <a href="#contact" class="ig-btn ig-btn-primary">Booking</a>
             <a href="https://www.instagram.com/alquimista.col/" target="_blank" rel="noopener noreferrer" class="ig-btn ig-btn-secondary">Follow on IG</a>
         </div>
+        <a href="https://linktr.ee/alquimistaofficial" target="_blank" rel="noopener noreferrer" class="ig-btn-linktree">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L8 8H2l5 4-2 7 7-4 7 4-2-7 5-4h-6z"/></svg>
+            linktr.ee/alquimistaofficial
+        </a>
 
         <div class="ig-mini-grid">
             <div class="mini-cell"><img src="assets/instagram/post-1.jpg" alt=""></div>
@@ -812,10 +825,6 @@
                 <a href="https://www.youtube.com/channel/UCRuoIHJICzoq91ATCXvTxdA" target="_blank" rel="noopener" class="soc-link">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
                     YouTube
-                </a>
-                <a href="https://hearthis.at/alquimista/" target="_blank" rel="noopener" class="soc-link">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-                    HearThis
                 </a>
             </div>
         </div>
