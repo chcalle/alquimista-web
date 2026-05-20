@@ -400,15 +400,16 @@
             transition:all .3s; margin-bottom:2.5rem;
         }
         .contact-email-btn:hover { background:var(--silver-l); transform:translateY(-2px); box-shadow:0 10px 30px rgba(255,255,255,.1); }
-        .socials { display:flex; justify-content:center; flex-wrap:wrap; gap:.55rem; }
+        .socials { display:flex; justify-content:center; flex-wrap:wrap; gap:.6rem; }
         .soc-link {
-            display:flex; align-items:center; gap:.45rem;
-            padding:.48rem .95rem; background:var(--bg-1);
-            border:1px solid var(--border-b); border-radius:5px;
-            font-size:.76rem; font-family:var(--mono); color:var(--silver-d);
-            transition:all .25s;
+            width:44px; height:44px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            background:var(--bg-1); border:1px solid var(--border-b);
+            color:var(--silver-d); transition:all .25s;
         }
+        .soc-link svg { width:17px; height:17px; }
         .soc-link:hover { border-color:var(--silver-d); color:var(--white); transform:translateY(-2px); }
+        .spotify-wrap { border-radius:12px; overflow:hidden; margin-top:2.5rem; }
 
         /* ── FOOTER ── */
         footer { background:var(--bg); padding:1.5rem 2rem; text-align:center; border-top:1px solid var(--border-b); }
@@ -558,7 +559,7 @@
     <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#releases">Releases</a></li>
+        <li><a href="#releases">Music</a></li>
         <li><a href="#gallery">Gallery</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
@@ -692,34 +693,17 @@
 <!-- RELEASES -->
 <section id="releases">
     <div class="container">
-        <div class="s-label">Discography</div>
-        <h2 class="s-title">RELEASES</h2>
+        <div class="s-label">Music</div>
+        <h2 class="s-title">MUSIC</h2>
 
-        <div class="releases-grid">
-            <div class="release-item reveal">
-                <img src="assets/instagram/release-1.jpg" alt="Wind Of The Flautist">
-                <div class="release-overlay"><span>Wind Of The Flautist</span></div>
-            </div>
-            <div class="release-item reveal">
-                <img src="assets/instagram/release-2.jpg" alt="Collected Works II">
-                <div class="release-overlay"><span>Collected Works II</span></div>
-            </div>
-            <div class="release-item reveal">
-                <img src="assets/instagram/release-3.jpg" alt="Acid Biology">
-                <div class="release-overlay"><span>Acid Biology</span></div>
-            </div>
-            <div class="release-item reveal">
-                <img src="assets/instagram/release-4.jpg" alt="Luminous Spores">
-                <div class="release-overlay"><span>Luminous Spores</span></div>
-            </div>
-            <div class="release-item reveal">
-                <img src="assets/instagram/release-5.jpg" alt="Hermetic Body">
-                <div class="release-overlay"><span>Hermetic Body</span></div>
-            </div>
-            <div class="release-item reveal">
-                <img src="assets/instagram/release-6.jpg" alt="Drawing The Symbols">
-                <div class="release-overlay"><span>Drawing The Symbols</span></div>
-            </div>
+        <div class="spotify-wrap reveal">
+            <iframe
+                title="Alquimista on Spotify"
+                src="https://open.spotify.com/embed/artist/2alq3w8ORFvNLr9OTDzUSZ?utm_source=generator&theme=0"
+                width="100%" height="380" frameborder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy">
+            </iframe>
         </div>
 
         <div class="s-label s-label-mt">Labels</div>
@@ -798,33 +782,26 @@
                 bookings@transmutedelectronics.com
             </a>
             <div class="socials">
-                <a href="https://www.instagram.com/alquimista.col/" target="_blank" rel="noopener" class="soc-link">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    Instagram
+                <a href="https://www.instagram.com/alquimista.col/" target="_blank" rel="noopener" class="soc-link" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                 </a>
-                <a href="https://www.facebook.com/AlquimistaDj/" target="_blank" rel="noopener" class="soc-link">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                    Facebook
+                <a href="https://www.facebook.com/AlquimistaDj/" target="_blank" rel="noopener" class="soc-link" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                 </a>
-                <a href="https://soundcloud.com/alquimistaofficial" target="_blank" rel="noopener" class="soc-link">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.017 0-.034.002-.051.004-.058.007-.108.039-.142.086-.033.045-.049.1-.046.156l.233 2.89-.233 2.85c-.003.056.013.11.046.155.034.047.084.079.142.086.017.002.034.004.051.004.144 0 .262-.12.262-.262l.264-2.833-.264-2.869c0-.145-.118-.267-.262-.267zm1.854-.555c-.029 0-.058.005-.086.014-.123.04-.211.153-.211.286l-.232 3.33.232 3.233c0 .133.088.246.211.286.028.009.057.014.086.014.168 0 .302-.134.302-.302l.263-3.231-.263-3.327c0-.168-.134-.303-.302-.303zm1.869-.322c-.035 0-.07.006-.103.017-.15.048-.259.186-.259.351l-.22 3.652.22 3.454c0 .165.109.303.259.351.033.011.068.017.103.017.206 0 .373-.167.373-.373l.25-3.449-.25-3.645c0-.206-.167-.375-.373-.375zm1.882-.055c-.04 0-.08.007-.118.02-.176.057-.304.22-.304.414l-.21 3.707.21 3.536c0 .194.128.357.304.414.038.013.078.02.118.02.238 0 .431-.193.431-.431l.239-3.539-.239-3.71c0-.238-.193-.431-.431-.431zm1.887.017c-.046 0-.091.008-.135.023-.2.064-.346.249-.346.47l-.198 3.69.198 3.522c0 .221.146.406.346.47.044.015.089.023.135.023.273 0 .494-.221.494-.494l.225-3.521-.225-3.688c0-.273-.221-.494-.494-.494zm1.882.126c-.05 0-.1.009-.148.026-.222.073-.383.279-.383.524l-.188 3.564.188 3.472c0 .245.161.451.383.524.048.017.098.026.148.026.31 0 .56-.25.56-.56l.213-3.462-.213-3.554c0-.31-.25-.562-.56-.562zm8.738-3.523c-.372 0-.727.071-1.053.197C18.187 5.51 16.47 4.2 14.47 4.2c-.539 0-1.058.104-1.534.292-.18.07-.228.14-.229.2v14.85c.001.076.054.14.13.158l.023.004h8.584c.69 0 1.25-.56 1.25-1.25V9.842c0-.69-.56-1.25-1.25-1.25z"/></svg>
-                    SoundCloud
+                <a href="https://soundcloud.com/alquimistaofficial" target="_blank" rel="noopener" class="soc-link" aria-label="SoundCloud">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.017 0-.034.002-.051.004-.058.007-.108.039-.142.086-.033.045-.049.1-.046.156l.233 2.89-.233 2.85c-.003.056.013.11.046.155.034.047.084.079.142.086.017.002.034.004.051.004.144 0 .262-.12.262-.262l.264-2.833-.264-2.869c0-.145-.118-.267-.262-.267zm1.854-.555c-.029 0-.058.005-.086.014-.123.04-.211.153-.211.286l-.232 3.33.232 3.233c0 .133.088.246.211.286.028.009.057.014.086.014.168 0 .302-.134.302-.302l.263-3.231-.263-3.327c0-.168-.134-.303-.302-.303zm1.869-.322c-.035 0-.07.006-.103.017-.15.048-.259.186-.259.351l-.22 3.652.22 3.454c0 .165.109.303.259.351.033.011.068.017.103.017.206 0 .373-.167.373-.373l.25-3.449-.25-3.645c0-.206-.167-.375-.373-.375zm1.882-.055c-.04 0-.08.007-.118.02-.176.057-.304.22-.304.414l-.21 3.707.21 3.536c0 .194.128.357.304.414.038.013.078.02.118.02.238 0 .431-.193.431-.431l.239-3.539-.239-3.71c0-.238-.193-.431-.431-.431zm1.887.017c-.046 0-.091.008-.135.023-.2.064-.346.249-.346.47l-.198 3.69.198 3.522c0 .221.146.406.346.47.044.015.089.023.135.023.273 0 .494-.221.494-.494l.225-3.521-.225-3.688c0-.273-.221-.494-.494-.494zm1.882.126c-.05 0-.1.009-.148.026-.222.073-.383.279-.383.524l-.188 3.564.188 3.472c0 .245.161.451.383.524.048.017.098.026.148.026.31 0 .56-.25.56-.56l.213-3.462-.213-3.554c0-.31-.25-.562-.56-.562zm8.738-3.523c-.372 0-.727.071-1.053.197C18.187 5.51 16.47 4.2 14.47 4.2c-.539 0-1.058.104-1.534.292-.18.07-.228.14-.229.2v14.85c.001.076.054.14.13.158l.023.004h8.584c.69 0 1.25-.56 1.25-1.25V9.842c0-.69-.56-1.25-1.25-1.25z"/></svg>
                 </a>
-                <a href="https://open.spotify.com/artist/2alq3w8ORFvNLr9OTDzUSZ" target="_blank" rel="noopener" class="soc-link">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-                    Spotify
+                <a href="https://open.spotify.com/artist/2alq3w8ORFvNLr9OTDzUSZ" target="_blank" rel="noopener" class="soc-link" aria-label="Spotify">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
                 </a>
-                <a href="https://ra.co/dj/alquimista" target="_blank" rel="noopener" class="soc-link">
-                    <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><text x="0" y="15" font-family="Arial" font-weight="900" font-size="13" fill="currentColor">RA</text></svg>
-                    Resident Advisor
+                <a href="https://ra.co/dj/alquimista" target="_blank" rel="noopener" class="soc-link" aria-label="Resident Advisor">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><text x="1" y="15" font-family="Arial" font-weight="900" font-size="12" fill="currentColor">RA</text></svg>
                 </a>
-                <a href="https://alquimistaofficial.bandcamp.com" target="_blank" rel="noopener" class="soc-link">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
-                    Bandcamp
+                <a href="https://alquimistaofficial.bandcamp.com" target="_blank" rel="noopener" class="soc-link" aria-label="Bandcamp">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
                 </a>
-                <a href="https://www.youtube.com/channel/UCRuoIHJICzoq91ATCXvTxdA" target="_blank" rel="noopener" class="soc-link">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
-                    YouTube
+                <a href="https://www.youtube.com/channel/UCRuoIHJICzoq91ATCXvTxdA" target="_blank" rel="noopener" class="soc-link" aria-label="YouTube">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
                 </a>
             </div>
         </div>
