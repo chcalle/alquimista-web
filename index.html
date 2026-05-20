@@ -411,6 +411,36 @@
         .soc-link:hover { border-color:var(--silver-d); color:var(--white); transform:translateY(-2px); }
         .spotify-wrap { border-radius:12px; overflow:hidden; margin-top:2.5rem; }
 
+        /* ── LINKTREE STRIP ── */
+        .lt-strip {
+            background: var(--bg-1);
+            border-top: 1px solid var(--border-b);
+            border-bottom: 1px solid var(--border-b);
+            padding: 2.2rem 2rem;
+            text-align: center;
+        }
+        .lt-link {
+            display: inline-flex; align-items: center; gap: 1rem;
+            color: var(--silver-d);
+            font-family: var(--mono); font-size: .82rem; letter-spacing: .12em;
+            text-transform: uppercase;
+            transition: color .25s;
+        }
+        .lt-link:hover { color: var(--white); }
+        .lt-icon {
+            width: 38px; height: 38px; border-radius: 50%;
+            border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; transition: border-color .25s;
+        }
+        .lt-link:hover .lt-icon { border-color: var(--silver-d); }
+        .lt-icon svg { width: 16px; height: 16px; }
+        .lt-label { display: flex; flex-direction: column; align-items: flex-start; gap: .15rem; }
+        .lt-label span { font-size: .62rem; color: var(--silver-d); opacity: .6; }
+        .lt-label strong { color: var(--white); font-size: .82rem; letter-spacing: .1em; }
+        .lt-arrow { opacity: .4; transition: opacity .25s, transform .25s; }
+        .lt-link:hover .lt-arrow { opacity: 1; transform: translateX(4px); }
+
         /* ── FOOTER ── */
         footer { background:var(--bg); padding:1.5rem 2rem; text-align:center; border-top:1px solid var(--border-b); }
         footer p { font-size:.72rem; color:var(--silver-d); font-family:var(--mono); }
@@ -615,11 +645,6 @@
             <a href="#contact" class="ig-btn ig-btn-primary">Booking</a>
             <a href="https://www.instagram.com/alquimista.col/" target="_blank" rel="noopener noreferrer" class="ig-btn ig-btn-secondary">Follow on IG</a>
         </div>
-        <a href="https://linktr.ee/alquimistaofficial" target="_blank" rel="noopener noreferrer" class="ig-btn-linktree">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L8 8H2l5 4-2 7 7-4 7 4-2-7 5-4h-6z"/></svg>
-            linktr.ee/alquimistaofficial
-        </a>
-
         <div class="ig-mini-grid">
             <div class="mini-cell"><img src="assets/instagram/post-1.jpg" alt=""></div>
             <div class="mini-cell"><img src="assets/instagram/post-2.png" alt=""></div>
@@ -706,17 +731,6 @@
             </iframe>
         </div>
 
-        <div class="s-label s-label-mt">Labels</div>
-        <div class="labels-wrap">
-            <span class="label-pill">True Type Tracks</span>
-            <span class="label-pill">Refluxed Records</span>
-            <span class="label-pill">Tekx Records</span>
-            <span class="label-pill">Elektrax Music</span>
-            <span class="label-pill">I-Traxx Red Edition</span>
-            <span class="label-pill">Achromatiq</span>
-            <span class="label-pill">Fluctuat Records</span>
-            <span class="label-pill">Transmuted Electronics</span>
-        </div>
     </div>
 </section>
 
@@ -767,6 +781,23 @@
         </div>
     </div>
 </section>
+
+<!-- LINKTREE -->
+<div class="lt-strip reveal">
+    <a href="https://linktr.ee/alquimistaofficial" target="_blank" rel="noopener noreferrer" class="lt-link">
+        <div class="lt-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+            </svg>
+        </div>
+        <div class="lt-label">
+            <span>All links in one place</span>
+            <strong>linktr.ee/alquimistaofficial</strong>
+        </div>
+        <svg class="lt-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+</div>
 
 <!-- CONTACT -->
 <section id="contact">
